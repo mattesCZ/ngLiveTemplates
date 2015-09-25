@@ -1,14 +1,6 @@
 <templateSet group="ngLiveTemplates">
-  <template name="ngsf" value="_this.$functionName$ = function($args$) {&#10;    $END$&#10;};" description="Angular service/factory function." toReformat="true" toShortenFQNames="true">
-    <variable name="functionName" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="args" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JS_STATEMENT" value="true" />
-    </context>
-  </template>
-  <template name="ngs" value=".service('$serviceName$',&#10;    ['$injectables$',&#10;    function($injectables$) {&#10;        var _this = this;&#10;&#10;        $END$&#10;    }]&#10;);" description="A new angular service." toReformat="false" toShortenFQNames="true">
-    <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="injectables" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="ngms" value="angular.module('$moduleName$',[&#10;    $END$&#10;])" description="A new angular module setter." toReformat="true" toShortenFQNames="true">
+    <variable name="moduleName" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="HTML_TEXT" value="false" />
       <option name="HTML" value="false" />
@@ -18,47 +10,31 @@
       <option name="CSS_DECLARATION_BLOCK" value="false" />
       <option name="CSS_RULESET_LIST" value="false" />
       <option name="CSS" value="false" />
-      <option name="JAVA_SCRIPT" value="false" />
+      <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
-      <option name="HAML" value="false" />
-      <option name="OTHER" value="false" />
-    </context>
-  </template>
-  <template name="ngms" value="angular.module('$moduleName$',[&#10;    $END$&#10;])" description="A new angular module setter." toReformat="false" toShortenFQNames="true">
-    <variable name="moduleName" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="HTML_TEXT" value="false" />
-      <option name="HTML" value="false" />
-      <option name="XSL_TEXT" value="false" />
-      <option name="XML" value="false" />
-      <option name="CSS_PROPERTY_VALUE" value="false" />
-      <option name="CSS_DECLARATION_BLOCK" value="false" />
-      <option name="CSS_RULESET_LIST" value="false" />
-      <option name="CSS" value="false" />
-      <option name="JAVA_SCRIPT" value="false" />
-      <option name="JS_EXPRESSION" value="false" />
       <option name="JS_STATEMENT" value="true" />
       <option name="HAML" value="false" />
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="ngmg" value="angular.module('$moduleName$')&#10;$END$" description="A new angular module getter." toReformat="false" toShortenFQNames="true">
+  <template name="ngmg" value="angular&#10;    .module('$moduleName$')&#10;    $END$" description="A new angular module getter." toReformat="true" toShortenFQNames="true">
     <variable name="moduleName" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="JAVA_SCRIPT" value="false" />
-      <option name="JS_EXPRESSION" value="false" />
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ngf" value=".factory('$factoryName$',&#10;    ['$injectables$',&#10;    function($injectables$) {&#10;        var _this = this;&#10;&#10;        $END$&#10;&#10;        return _this;&#10;    }]&#10;);" description="A new angular factory." toReformat="false" toShortenFQNames="true">
+  <template name="ngf" value=".factory('$factoryName$', $factoryName$);&#10;&#10;$factoryName$.$inject = ['$injectables$'];&#10;&#10;function $factoryName$($injectables$) {&#10;    return {&#10;        $serviceFunction$: $serviceFunction$&#10;    };&#10;&#10;    function $serviceFunction$() {&#10;        $END$&#10;    }&#10;}&#10;" description="A new angular factory." toReformat="true" toShortenFQNames="true">
     <variable name="factoryName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="injectables" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="serviceFunction" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JS_STATEMENT" value="false" />
+      <option name="JS_EXPRESSION" value="false" />
+      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ngdl" value=".directive('$directiveName$',&#10;    ['$injectables$',&#10;    function($injectables$) {&#10;        return {&#10;            restrict: 'E',&#10;            replace: true,&#10;            templateUrl: '$directiveName$.tpl.html',&#10;            scope: {&#10;                $scopeVar$: '='&#10;            },&#10;            link: function(scope, element, attrs) {&#10;                $END$&#10;            }&#10;        };&#10;    }]&#10;);" description="A directive with a linking function." toReformat="false" toShortenFQNames="true">
+  <template name="ngdl" value=".directive('$directiveName$', $directiveName$);&#10;&#10;$directiveName$.$inject = ['$injectables$'];&#10;&#10;function $directiveName$($injectables$) {&#10;    return {&#10;        restrict: 'E',&#10;        replace: true,&#10;        templateUrl: '$directiveName$.tmpl.html',&#10;        scope: {&#10;            $scopeVar$: '='&#10;        },&#10;        link: linkFunc&#10;    };&#10;&#10;    function linkFunc(scope, element, attrs) {&#10;        $END$&#10;    }&#10;}&#10;" description="A directive with a linking function." toReformat="true" toShortenFQNames="true">
     <variable name="directiveName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="injectables" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="scopeVar" expression="" defaultValue="" alwaysStopAt="true" />
@@ -72,15 +48,16 @@
       <option name="CSS_RULESET_LIST" value="false" />
       <option name="CSS" value="false" />
       <option name="JAVA_SCRIPT" value="false" />
-      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_EXPRESSION" value="false" />
+      <option name="JS_STATEMENT" value="true" />
       <option name="HAML" value="false" />
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="ngdc" value=".directive('$directiveName$',&#10;    ['$injectables$',&#10;    function($injectables$) {&#10;        return {&#10;            restrict: 'E',&#10;            replace: true,&#10;            templateUrl: '$directiveName$.tpl.html',&#10;            scope: {&#10;                $scopeVar$: '='&#10;            },&#10;            controller: ['$scope', function($scope) {&#10;                $END$&#10;            }]&#10;        };&#10;    }]&#10;);&#10;" description="A directive with a controller function." toReformat="false" toShortenFQNames="true">
+  <template name="ngdc" value=".directive('$directiveName$', $directiveName$);&#10;&#10;function $directiveName$() {&#10;    return {&#10;        restrict: 'E',&#10;        replace: true,&#10;        templateUrl: '$directiveName$.tmpl.html',&#10;        scope: {&#10;            $scopeVar$: '='&#10;        },&#10;        controller: $directiveName$Ctrl,&#10;        controllerAs: 'vm',&#10;        bindToController: true&#10;    };&#10;}&#10;&#10;$directiveName$Ctrl.$inject = ['$injectables$'];&#10;&#10;function $directiveName$Ctrl($injectables$) {&#10;    var vm = this;&#10;&#10;    $END$&#10;}&#10;" description="A directive with a controller function." toReformat="true" toShortenFQNames="true">
     <variable name="directiveName" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="injectables" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="scopeVar" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="injectables" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="HTML_TEXT" value="false" />
       <option name="HTML" value="false" />
@@ -91,12 +68,13 @@
       <option name="CSS_RULESET_LIST" value="false" />
       <option name="CSS" value="false" />
       <option name="JAVA_SCRIPT" value="false" />
-      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_EXPRESSION" value="false" />
+      <option name="JS_STATEMENT" value="true" />
       <option name="HAML" value="false" />
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="ngc" value=".controller('$controllerName$',&#10;    ['$injectables$',&#10;    function($scope, $injectables$) {&#10;        $END$&#10;    }]&#10;);" description="A new angular controller." toReformat="false" toShortenFQNames="true">
+  <template name="ngc" value=".controller('$controllerName$', $controllerName$);&#10;&#10;$controllerName$.$inject = ['$injectables$'];&#10;&#10;function $controllerName$($injectables$) {&#10;    var vm = this;&#10;&#10;    $END$&#10;}" description="A new angular controller." toReformat="true" toShortenFQNames="true">
     <variable name="controllerName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="injectables" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -108,8 +86,8 @@
       <option name="CSS_DECLARATION_BLOCK" value="false" />
       <option name="CSS_RULESET_LIST" value="false" />
       <option name="CSS" value="false" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JS_STATEMENT" value="false" />
+      <option name="JS_EXPRESSION" value="false" />
+      <option name="JS_STATEMENT" value="true" />
       <option name="HAML" value="false" />
       <option name="OTHER" value="false" />
     </context>
@@ -153,7 +131,7 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="$v" value="$scope.$variable$ = $value$;&#10;$END$" description="Defines a new $scope'd variable inside an AngularJS controller." toReformat="true" toShortenFQNames="true">
+  <template name="scv" value="$scope.$variable$ = $value$;&#10;$END$" description="Defines a new $scope'd variable inside an AngularJS controller." toReformat="true" toShortenFQNames="true">
     <variable name="variable" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -170,7 +148,7 @@
       <option name="OTHER" value="false" />
     </context>
   </template>
-  <template name="$f" value="$scope.$functionName$ = function($args$) {&#10;    $END$&#10;};" description="Define a new $scope'd function (usually inside an AngularJS Controller). You can change the function name and arguments." toReformat="true" toShortenFQNames="true">
+  <template name="scf" value="$scope.$functionName$ = function($args$) {&#10;    $END$&#10;};" description="Define a new $scope'd function (usually inside an AngularJS Controller). You can change the function name and arguments." toReformat="true" toShortenFQNames="true">
     <variable name="functionName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="args" expression="" defaultValue="" alwaysStopAt="true" />
     <context>

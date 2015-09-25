@@ -1,5 +1,7 @@
 # ngLiveTemplates
-Angular live templates for Idea platform IDEs
+Angular live templates for Idea platform IDEs.
+
+It follows [Angular Style Guide](https://github.com/johnpapa/angular-styleguide) instructions.
 
 ## Installation
 
